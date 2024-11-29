@@ -1,7 +1,7 @@
 # Space Invaders Game
 
 ## Overview
-This is a classic Space Invaders game implemented in Python. The game involves shooting down alien invaders with a spaceship. The objective is to destroy all invaders while avoiding being hit by their projectiles.
+This is a classic Space Invaders game implemented in JavaScript. The game involves shooting down alien invaders with a spaceship. The objective is to destroy all invaders while avoiding being hit by their projectiles.
 
 ## Features
 - Multiple levels of increasing difficulty
