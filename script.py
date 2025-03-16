@@ -145,6 +145,19 @@ def game_loop():
     check_game_over()
     next_level()
 
+# Ensure the game starts automatically when the page loads
+def initialize_game():
+    global lives, score, level, game_running, bullets, power_ups
+    lives = 3
+    score = 0
+    level = 1
+    game_running = True
+    bullets = []
+    power_ups = []
+    create_enemies()
+
+initialize_game()
+
 # Initialize game
 create_enemies()
 timer.set_interval(game_loop, 16)  # 60 FPS

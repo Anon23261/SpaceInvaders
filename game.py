@@ -12,6 +12,6 @@ def start_game(event):
     create_enemies()
     alert("Game started!")
 
-# Bind a button click to start the game
-document <= '<button id="start">Start Game</button>'
+# Ensure the button is added dynamically to the DOM
+document <= '<button id="start" style="position:absolute;top:10px;left:10px;">Start Game</button>'
 document["start"].bind("click", start_game)
