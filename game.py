@@ -1,4 +1,16 @@
-from browser import document, alert
+from script import create_enemies
+
+
+try:
+    try:
+        from browser import document, alert # type: ignore
+    except ImportError:
+        document = None
+        alert = lambda msg: print(f"ALERT: {msg}")
+except ImportError:
+    print("The 'browser' module is not available. This code must be run in a Brython environment.")
+    document = None
+    alert = lambda msg: print(f"ALERT: {msg}")
 
 # Example game logic
 def start_game(event):

@@ -1,4 +1,4 @@
-from browser import document, html, timer
+from browser import document, html, timer # type: ignore
 import random
 
 # Canvas setup
@@ -118,7 +118,7 @@ def check_game_over():
     global game_running
     if lives <= 0:
         game_running = False
-        alert("Game Over! Your score: " + str(score))
+        document["gameCanvas"].textContent = f"Game Over! Your score: {score}"
 
 def next_level():
     global level, enemies
