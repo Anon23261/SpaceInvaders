@@ -14,8 +14,13 @@ jobs:
       uses: actions/checkout@v3
 
     - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: /workspaces/SpaceInvaders
-        enable_jekyll: false
+      run: |
+        git config --global user.name "GitHub Actions"
+        git config --global user.email "actions@github.com"
+        git checkout --orphan gh-pages
+        git rm -rf .
+        cp -r /workspaces/SpaceInvaders/* .
+        rm -rf .github
+        git add .
+        git commit -m "Deploy to GitHub Pages"
+        git push --force origin gh-pages
