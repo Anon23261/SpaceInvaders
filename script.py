@@ -1,4 +1,5 @@
 from browser import document, html, timer
+import random
 
 # Canvas setup
 canvas = document["gameCanvas"]
@@ -11,6 +12,11 @@ bullets = []
 enemies = []
 score = 0
 game_running = True
+
+# Additional game variables
+lives = 3
+level = 1
+power_ups = []
 
 # Key handling
 keys = set()
@@ -78,6 +84,48 @@ def draw_score():
     ctx.font = "20px Arial"
     ctx.fillText(f"Score: {score}", 10, 20)
 
+def draw_lives():
+    ctx.fillStyle = "white"
+    ctx.font = "20px Arial"
+    ctx.fillText(f"Lives: {lives}", WIDTH - 100, 20)
+
+def draw_level():
+    ctx.fillStyle = "white"
+    ctx.font = "20px Arial"
+    ctx.fillText(f"Level: {level}", WIDTH // 2 - 40, 20)
+
+def create_power_up():
+    power_ups.append({"x": random.randint(0, WIDTH - 20), "y": 0, "width": 20, "height": 20, "color": "blue", "type": "shield"})
+
+def draw_power_ups():
+    ctx.fillStyle = "blue"
+    for power_up in power_ups:
+        ctx.fillRect(power_up["x"], power_up["y"], power_up["width"], power_up["height"])
+
+def update_power_ups():
+    global power_ups, lives
+    for power_up in power_ups[:]:
+        power_up["y"] += 2
+        if (player["x"] < power_up["x"] + power_up["width"] and
+            player["x"] + player["width"] > power_up["x"] and
+            player["y"] < power_up["y"] + power_up["height"] and
+            player["y"] + player["height"] > power_up["y"]):
+            power_ups.remove(power_up)
+            if power_up["type"] == "shield":
+                lives += 1
+
+def check_game_over():
+    global game_running
+    if lives <= 0:
+        game_running = False
+        alert("Game Over! Your score: " + str(score))
+
+def next_level():
+    global level, enemies
+    if not enemies:
+        level += 1
+        create_enemies()
+
 def game_loop():
     if not game_running:
         return
@@ -85,11 +133,17 @@ def game_loop():
     move_player()
     shoot_bullet()
     update_bullets()
+    update_power_ups()
     detect_collisions()
     draw_player()
     draw_bullets()
     draw_enemies()
+    draw_power_ups()
     draw_score()
+    draw_lives()
+    draw_level()
+    check_game_over()
+    next_level()
 
 # Initialize game
 create_enemies()
