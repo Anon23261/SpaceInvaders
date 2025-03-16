@@ -21,7 +21,7 @@ Welcome to **Space Invaders**, the ultimate retro arcade experience reimagined! 
 ## Installation
 1. Clone the repository:
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/Anon23261/SpaceInvaders.git
    ```
 2. Navigate to the project directory:
    ```bash
